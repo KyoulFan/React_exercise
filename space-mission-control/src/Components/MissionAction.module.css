@@ -1,0 +1,18 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  margin-bottom: 10px;
+  border: 2px solid rgb(54, 255, 47);
+  background-color: transparent;
+}
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+}

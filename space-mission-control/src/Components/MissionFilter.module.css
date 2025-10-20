@@ -1,0 +1,30 @@
+.filterRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  height: 40px;
+  border-radius: 6px;
+  border: 2px solid rgb(245, 5, 5);
+  background-color: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  color: #ffffff;
+ 
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
