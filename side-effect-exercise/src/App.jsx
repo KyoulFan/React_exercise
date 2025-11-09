@@ -8,7 +8,7 @@ function App() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [isShuffling, setIsShuffling] = useState(false);
 
-  // Part 1: 页面加载时创建一副新牌
+  // Part 1: loading cards
   useEffect(() => {
     async function getNewDeck() {
       try {
@@ -19,7 +19,7 @@ function App() {
         const data = await res.json();
 
         setDeckId(data.deck_id);
-        setRemaining(data.remaining); // 一般是52
+        setRemaining(data.remaining);
       } catch (err) {
         console.error("Error getting new deck:", err);
         alert("Error: cannot load deck.");
@@ -31,12 +31,10 @@ function App() {
     getNewDeck();
   }, []);
 
-  // 点击抽牌
+  // click to shuffle
   async function handleDraw() {
-    // 没有牌堆 / 正在操作中就不处理
     if (!deckId || isDrawing || isShuffling) return;
 
-    // 没牌了就提示
     if (remaining === 0) {
       alert("Error: no cards remaining!");
       return;
@@ -56,10 +54,8 @@ function App() {
 
       const drawnCard = data.cards[0];
 
-      // 把新牌加到已抽牌数组
       setCards((prevCards) => [...prevCards, drawnCard]);
 
-      // 更新剩余数量
       setRemaining(data.remaining);
     } catch (err) {
       console.error("Error drawing card:", err);
@@ -69,7 +65,6 @@ function App() {
     }
   }
 
-  // Part 2: 洗牌重置
   async function handleShuffle() {
     if (!deckId || isShuffling || isDrawing) return;
 
@@ -87,9 +82,7 @@ function App() {
         return;
       }
 
-      // 清空画面上的牌
       setCards([]);
-      // 重置剩余牌数量（一般是52，直接读返回值更保险）
       setRemaining(data.remaining || 52);
     } catch (err) {
       console.error("Error shuffling deck:", err);
@@ -103,11 +96,9 @@ function App() {
     <div>
       <h1>Deck of Cards</h1>
 
-      {/* 状态提示 */}
       {isLoadingDeck && <p>Loading deck...</p>}
       {!isLoadingDeck && !deckId && <p>Failed to load deck.</p>}
 
-      {/* 操作按钮 */}
       <div>
         <button
           onClick={handleDraw}
@@ -126,7 +117,6 @@ function App() {
 
       <p>Cards remaining: {remaining}</p>
 
-      {/* 展示已抽出的牌：简单一点全部列出来 */}
       <div>
         {cards.map((card) => (
           <div key={card.code}>
